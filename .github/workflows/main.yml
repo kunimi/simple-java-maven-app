@@ -1,12 +1,7 @@
 name: Black Duck SCA Scan
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
   blackduck_scan:
