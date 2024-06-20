@@ -12,13 +12,15 @@ jobs:
     runs-on:
       labels: self-hosted
     container:
-      image: maven:3.9.5-eclipse-temurin-17-alpine
+      # image: maven:3.9.5-eclipse-temurin-17-alpine
+      image: maven:3.9.5-eclipse-temurin-17
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Install Dependencies
-      run: apk add unzip
+      # run: apk add unzip
+      run: apt-get update && apt-get install -y unzip
 
     # - name: Print synopsys bridge directory
     #   run: |
