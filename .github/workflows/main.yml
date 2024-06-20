@@ -23,7 +23,7 @@ jobs:
         distribution: 'adopt'
     
     - name: Add Maven to PATH
-      run: echo "::add-path::/home/ubuntu/apps/maven/apache-maven-3.9.8/bin"
+      run: echo "/home/ubuntu/apps/maven/apache-maven-3.9.8/bin" >> $GITHUB_PATH
 
     - name: Remove existing Synopsys Bridge
       run: rm -rf /github/home/synopsys-bridge
