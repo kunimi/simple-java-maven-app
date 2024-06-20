@@ -20,11 +20,11 @@ jobs:
     - name: Install Dependencies
       run: apk add unzip
 
-    - name: Print synopsys bridge directory
-      run: |
-        ls /github/home -la
-        ls /github/home/synopsys-bridge -la
-        ls /github/home/synopsys-bridge/extensions -la
+    # - name: Print synopsys bridge directory
+    #   run: |
+    #     ls /github/home -la
+    #     ls /github/home/synopsys-bridge -la
+    #     ls /github/home/synopsys-bridge/extensions -la
 
     - name: SCA Scan
       uses: synopsys-sig/synopsys-action@v1.9.0
