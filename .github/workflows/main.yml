@@ -21,9 +21,9 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-
-    - name: Build project with Maven
-      run: mvn clean install
+    
+    - name: Add Maven to PATH
+      run: echo "::add-path::/home/ubuntu/apps/maven/apache-maven-3.9.8/bin"
 
     - name: Remove existing Synopsys Bridge
       run: rm -rf /github/home/synopsys-bridge
