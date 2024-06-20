@@ -1,0 +1,50 @@
+name: Scan with synopsys action@v1.9.0
+
+on:
+  workflow_dispatch:
+
+env:
+  PROJECT_NAME: 'testactions'
+  PROJECT_VERSION: '1.0'
+
+jobs:
+  sca:
+    runs-on:
+      labels: self-hosted
+    container:
+      image: maven:3.9.5-eclipse-temurin-17-alpine
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Dependencies
+      run: apk add unzip
+
+    - name: Print synopsys bridge directory
+      run: |
+        ls /github/home -la
+        ls /github/home/synopsys-bridge -la
+        ls /github/home/synopsys-bridge/extensions -la
+
+    - name: SCA Scan
+      uses: synopsys-sig/synopsys-action@v1.9.0
+
+      env:
+        DETECT_PROJECT_NAME: ${{ env.PROJECT_NAME }}
+        DETECT_PROJECT_VERSION_NAME: ${{ env.PROJECT_VERSION }}
+        DETECT_TOOLS: 'DETECTOR'
+        DETECT_DETECTOR_SEARCH_CONTINUE: 'true'
+        DETECT_DETECTOR_SEARCH_DEPTH: '10000'
+        DETECT_BLACKDUCK_SIGNATURE_SCANNER_SNIPPET_MATCHING: 'SNIPPET_MATCHING'
+        DETECT_BLACKDUCK_SIGNATURE_SCANNER_UPLOAD_SOURCE_MODE: 'true'
+
+      with:
+        blackduck_url: ${{ secrets.BLACKDUCK_URL }}
+        blackduck_token: ${{ secrets.BLACKDUCK_API_TOKEN }}
+        blackduck_scan_full: true
+        # blackduck_trust_cert: true
+
+        ### SARIF report generation and upload to GitHub Advanced Security
+        # blackduck_reports_sarif_create: true # Create Black Duck SARIF report and upload it as artifact
+        # blackduck_upload_sarif_report: true # Upload Black Duck SARIF report in GitHub Advanced Security tab
+        # github_token: ${{ secrets.GITHUB_TOKEN }} # Required when blackduck_upload_sarif_report is set as true
