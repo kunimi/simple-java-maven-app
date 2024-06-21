@@ -39,12 +39,12 @@ jobs:
         DETECT_DETECTOR_SEARCH_DEPTH: '10000'
         DETECT_BLACKDUCK_SIGNATURE_SCANNER_SNIPPET_MATCHING: 'SNIPPET_MATCHING'
         DETECT_BLACKDUCK_SIGNATURE_SCANNER_UPLOAD_SOURCE_MODE: 'true'
+        BLACKDUCK_TRUST_CERT: 'true'
 
       with:
         blackduck_url: ${{ secrets.BLACKDUCK_URL }}
         blackduck_token: ${{ secrets.BLACKDUCK_API_TOKEN }}
         blackduck_scan_full: true
-        BLACKDUCK_TRUST_CERT: true
         # blackduck_trust_cert: true
 
         ### SARIF report generation and upload to GitHub Advanced Security
