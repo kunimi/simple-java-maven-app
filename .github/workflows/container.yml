@@ -29,7 +29,7 @@ jobs:
     #     ls /github/home/synopsys-bridge/extensions -la
 
     - name: SCA Scan
-      uses: synopsys-sig/synopsys-action@v1.9.0
+      uses: synopsys-sig/synopsys-action@v1.10.0
 
       env:
         DETECT_PROJECT_NAME: ${{ env.PROJECT_NAME }}
