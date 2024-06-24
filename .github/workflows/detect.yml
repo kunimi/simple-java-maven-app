@@ -1,4 +1,4 @@
-name: Scan with synopsys action@v1.9.0
+name: Scan with synopsys action@v1.9.0 updated version 
 
 on:
   workflow_dispatch:
