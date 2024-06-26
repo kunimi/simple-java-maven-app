@@ -34,13 +34,12 @@ jobs:
       env:
         DETECT_PROJECT_NAME: ${{ env.PROJECT_NAME }}
         DETECT_PROJECT_VERSION_NAME: ${{ env.PROJECT_VERSION }}
-        DETECT_TOOLS: 'DETECTOR'
+        DETECT_TOOLS: 'DETECTOR,SIGNATURE_SCAN'
         DETECT_DETECTOR_SEARCH_CONTINUE: 'true'
         DETECT_DETECTOR_SEARCH_DEPTH: '10000'
         DETECT_BLACKDUCK_SIGNATURE_SCANNER_SNIPPET_MATCHING: 'SNIPPET_MATCHING'
         DETECT_BLACKDUCK_SIGNATURE_SCANNER_UPLOAD_SOURCE_MODE: 'true'
         BLACKDUCK_TRUST_CERT: 'true'
-
       with:
         blackduck_url: ${{ secrets.BLACKDUCK1_URL }}
         blackduck_token: ${{ secrets.BLACKDUCK1_API_TOKEN }}
@@ -48,16 +47,6 @@ jobs:
         blackduck_reports_sarif_create: true
         blackduck_upload_sarif_report: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
-      continue-on-error: true
-
-    - name: Check SCA Scan Result
-      if: always()
-      run: |
-        if grep -q "File .bridge/Blackduck SARIF Generator/report.sarif.json does not exist" <<<"${{ steps.sca-scan.outputs.stdout }}"; then
-          echo "SARIF file not found, continuing execution."
-        else
-          exit 1
-        fi
   
     - name: Pause for Debugging
       if: failure()
